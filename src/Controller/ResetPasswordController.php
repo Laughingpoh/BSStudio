@@ -29,6 +29,7 @@ class ResetPasswordController extends AbstractController
     #[Route('/mot-de-passe-oublie', name: 'app_reset_password')]
     public function index(Request $request): Response
     {
+        $YOUR_DOMAIN = 'http://46.101.60.72';
         if ($this->getUser()) {
             return $this->redirectToRoute('app_home');
         }
@@ -50,7 +51,8 @@ class ResetPasswordController extends AbstractController
               $url = $this->generateUrl('app_update_password',[
                   'token' => $reset_password->getToken()
               ]);
-              $corps="Vous avez récemment demandé la réinitialisation du mot de passe de votre identifiant. <br/>Pour terminer le processus, veuillez <a href='".$url."'>cliquer ici</a>.";
+              dd($url);
+              $corps="Vous avez récemment demandé la réinitialisation du mot de passe de votre identifiant. <br/>Pour terminer le processus, veuillez <a href='".$YOUR_DOMAIN.$url."'>cliquer ici</a>.";
               $mail = new Mail();
               $mail->send($user->getEmail(), $user->getFullName(),'Réinitialisation de mot de passe - Belgian Sound Studio',$content,$corps);
               $emailHash = $user->hideEmailAddress($user->getEmail());
