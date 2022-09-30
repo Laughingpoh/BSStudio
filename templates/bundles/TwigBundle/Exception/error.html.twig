@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page introuvable - Sound Studio{% endblock %}
+
+{% block content %}
+    <div class="block-small">
+        <h2 class="text-center"><strong>La page que vous demandez est introuvable.</strong></h2>
+        <div class="text-center">
+            <a href="{{path('app_home')}}" class ="btn btn-sm btn-dark mt-3">Revenir à l'accueil</a>
+        </div>
+    </div>
+{% endblock %}

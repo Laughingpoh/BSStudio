@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mot de passe oublié - Sound Studio{% endblock %}
+
+{% block content %}
+    <div class="block-small">
+        {%for message in app.flashes('notice') %}
+            <div class="alert alert-info" role="alert">
+                {{message}}
+            </div>
+        {%endfor%}
+        {%for message in app.flashes('notice') %}
+            <div class="alert alert-info" role="alert">
+                {{message}}
+            </div>
+        {%endfor%}
+        <h1 class="h3 mb-3 font-weight-normal text-center"><strong>Nouveau mot de passe de <br/>l'identifiant</strong></h1>
+        <p class="p mb-3 font-weight-light text-center">Saisissez un nouveau mot de passe pour votre identifiant</p>
+        {{form(form)}}
+    </div>
+{% endblock %}

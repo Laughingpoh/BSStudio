@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{%block carousel%}
+{%endblock%}
+{%block content%}
+
+        <!-- START THE FEATURETTES -->
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Explorer le studio <span class="text-muted">le plus grand de belgique.</span></h2>
+                <p class="lead">Avec plus de 200 m² de superficie, 5 cabines de prise de son, une acoustique bien mesurée, notre studio est l'un des plus grand studio dans la région wallone à posséder la meilleur qualitée de son. Notre objectif, réalisé au mieux vos désirs en terme de sonorité.</p>
+            </div>
+            <div class="col-md-5">
+                <img src="{{asset('assets/img/one1.png')}}" class="img-fluid" alt="studio">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                <h2 class="featurette-heading">Un nouveau mix <span class="text-muted">online</span></h2>
+                <p class="lead">Notre studio nous permet de faire votre mix en ligne grâce à notre "quipe disponible 24h sur 24. Vous déposez vos fichiers, nous nous occupons du reste.</p>
+            </div>
+            <div class="col-md-5 order-md-1">
+                <img src="{{asset('assets/img/one2.png')}}" class="img-fluid" alt="studio">
+
+            </div>
+        </div>
+
+        <!-- /END THE FEATURETTES -->
+    <hr class="featurette-divider">
+    <div class="container marketing">
+        <h2 class="featurette-heading text-center">Nos produits <span class="text-muted">populaires</span></h2>
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-4">
+                    {%include 'product/single_product.html.twig'%}
+                </div>
+            {%endfor%}
+        </div><!-- /.row -->
+        <hr class="featurette-divider">
+
+    </div><!-- /.container -->
+
+{%endblock%}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes adresses - Sound Studio{% endblock %}
+
+{% block content %}
+    <!--
+    <a href="{{path('account')}}" class="btn btn-dark btn-sm float-right ml-4">Retour</a>
+    <a href="{{path('app_account_address_add')}}" class="btn btn-dark btn-sm float-right">Ajouter une adresse</a>
+    !-->
+
+    <h1>Mes adresses</h1>
+   Gèrer vos adresses</br>
+    <hr>
+    {%if app.user.addresses|length == 0%}
+        <p class="text-center">    Vous n'avez pas encore ajouté une adresse à votre compte client.<br/> Pour en ajouter une,
+            <a href="{{path('app_account_address_add')}}">cliquez ici.</a>
+        </p>
+    {%else%}
+<div class="card-deck">
+        {%for address in app.user.addresses%}
+    <div class="col-md-4 mb-auto">
+            <div class="card text-white bg-dark mb-4" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{address.name}}</h5>
+                    <p class="card-text">
+                        {{address.address}}, <br/>
+                        {{address.postal}} - {{address.city}} - {{address.country}}
+                    </p>
+                    <a href="{{path('app_account_address_edit', {'id' : address.id})}}" class="btn btn-light btn-sm float-left">Modifier</a>
+                    <a href="{{path('app_account_address_delete', {'id' : address.id})}}" class="btn btn-danger btn-sm float-right">Supprimer</a>
+                </div>
+            </div>
+    </div>
+        {%endfor%}
+</div>
+        <a href="{{path('app_account_address_add')}}" class="btn btn-sm btn-info btn-block mt-3">Ajouter une adresse</a>
+
+        {%endif%}
+    <a href="{{path('account')}}" class="btn btn-sm btn-dark btn-block mt-3">Retour</a>
+
+
+{% endblock %}

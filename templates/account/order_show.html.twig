@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma commande - Sound Studio{% endblock %}
+
+{% block content %}
+    <h1>Détails de la commande</h1>
+    <hr>
+    <strong>Status de la commande : </strong>
+    {% if order.state == 1 %}
+        Paiement accepté
+    {% elseif order.state == 2 %}
+        En cours de traitement
+    {% elseif order.state == 3 %}
+        Traité
+    {%endif%}
+    <br/>
+    <strong>Date de la commande : </strong>{{order.createdAt|date('d/m/Y')}}</br>
+    <strong>Référence de la commance : </strong>{{order.reference}}</br>
+    <strong>Délais de traitement choisi : </strong>{{order.carrierName}}</br>
+
+    <table class="table mt-4">
+        <thead>
+        <tr>
+            <th scope="col">Produit</th>
+            <th scope="col">Quantité</th>
+            <th scope="col">Prix unitaire</th>
+            <th scope="col">Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        {%for product in order.orderDetails%}
+        <tr>
+            <td>{{ product.product }}</td>
+            <td>x {{ product.quantity }}</td>
+            <td>{{ (product.price /100)|number_format(2,',','.') }} €</td>
+            <td>{{ (product.total /100)|number_format(2,',','.') }} €</td>
+        </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+
+
+    <div class="text-right">
+        <strong>Sous-total : </strong> {{ (order.getTotal /100)|number_format(2,',','.') }} €</br>
+        <strong>Délais traitement :</strong> {{ (order.carrierPrice /100)|number_format(2,',','.') }} €</br>
+        <strong>Total : </strong>{{ ((order.carrierPrice + order.getTotal)/100)|number_format(2,',','.') }} €
+    </div>
+    <a href="{{path('app_account_order')}}" class="btn btn-sm btn-dark btn-block mt-3">Retour</a>
+
+
+{% endblock %}

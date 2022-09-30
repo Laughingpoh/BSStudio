@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte - Sound Studio{% endblock %}
+
+{% block content %}
+    <h1>Mon compte</h1>
+    Bievenue sur votre compte, {{app.user.firstname}} {{app.user.lastname}}</br>
+    <hr>
+
+
+
+<div class="card-deck">
+    {%if is_granted('ROLE_ADMIN')%}
+    <div class="card text-white bg-info mb-4" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Panel administrateur</h5>
+            <p class="card-text">Accéder au Dashboard et au backoffice </p>
+            <a href="/admin" class="btn btn-light">Accéder</a>
+        </div>
+    </div>
+    {%endif%}
+    <div class="card text-white bg-dark mb-4" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Mes commandes</h5>
+            <p class="card-text">Visualiser les commandes passées sur mon compte </p>
+            <a href="{{path('app_account_order')}}" class="btn btn-light">Accéder</a>
+        </div>
+    </div>
+    <div class="card text-white bg-dark mb-4" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Mes adresses</h5>
+            <p class="card-text">Ajouter, modifier ou supprimer une adresse</p>
+            <a href="{{path('app_account_address')}}" class="btn btn-light">Accéder</a>
+        </div>
+    </div>
+    <div class="card text-white bg-dark mb-4" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Mot de passe</h5>
+            <p class="card-text">Modifier et valider le mot de passe de mon compte</p>
+            <a href="{{path('account_password')}}" class="btn btn-light">Accéder</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

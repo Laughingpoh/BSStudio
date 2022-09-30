@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur 405 - Sound Studio{% endblock %}
+
+{% block content %}
+    <div class="block-small">
+        <h2 class="text-center"><strong>Erreur 405</strong></h2>
+        <h3 class="text-center">Méthode non-autorisée</h3>
+        <div class="text-center">
+            <a href="{{path('app_home')}}" class ="btn btn-sm btn-dark mt-3">Revenir à l'accueil</a>
+        </div>
+    </div>
+{% endblock %}
