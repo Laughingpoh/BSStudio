@@ -51,7 +51,6 @@ class ResetPasswordController extends AbstractController
               $url = $this->generateUrl('app_update_password',[
                   'token' => $reset_password->getToken()
               ]);
-              dd($url);
               $corps="Vous avez récemment demandé la réinitialisation du mot de passe de votre identifiant. <br/>Pour terminer le processus, veuillez <a href='".$YOUR_DOMAIN.$url."'>cliquer ici</a>.";
               $mail = new Mail();
               $mail->send($user->getEmail(), $user->getFullName(),'Réinitialisation de mot de passe - Belgian Sound Studio',$content,$corps);
