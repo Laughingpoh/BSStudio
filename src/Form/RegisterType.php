@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
 
 class RegisterType extends AbstractType
 {
@@ -70,8 +71,6 @@ class RegisterType extends AbstractType
                     'class' => 'btn btn-lg btn-dark btn-block mt-3'
                 ]
             ])
-
-
         ;
     }
 

@@ -13,9 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class  AccountPasswordController extends AbstractController
 {
-
     private $entityManager;
-
     /**
      * @param $entityManager
      */
@@ -24,7 +22,6 @@ class  AccountPasswordController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-
     #[Route('/compte/modification-motdepasse', name: 'account_password')]
     public function index(Request $request, UserPasswordHasherInterface $encoder): Response
     {
@@ -32,16 +29,11 @@ class  AccountPasswordController extends AbstractController
 
         $user = $this->getUser();
         $form = $this->createForm(ChangePasswordType::class,$user);
-
-        $form->handleRequest($request); //écoute
-
+        //handle ChangePasswordTypeForm
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() ) {
-
             $old_pwd = $form->get('old_password')->getData();
-            //dd($old_pwd);
-
-
             if($encoder->isPasswordValid($user,$old_pwd)){
                 $new_pwd = $form->get('new_password')->getData();
                 $password = $encoder->hashPassword($user,$new_pwd);
@@ -53,13 +45,12 @@ class  AccountPasswordController extends AbstractController
                 $mail = new Mail();
                 $content = "Bonjour ".$user->getFirstname().",";
                 $corps = "Le mot de passe de votre compte a bien été changé.";
-                $mail->send($user->getEmail(),$user->getFirstname(),'Changement de mot de passe - Belgian Sound Studio',$content,$corps);
+                $mail->send($user->getEmail(),$user->getFirstname(),
+                    'Changement de mot de passe - Belgian Sound Studio',$content,$corps);
             } else {
                 $notification = "Votre mot de passe actuel n'est pas le bon.";
             }
-
         }
-
         return $this->render('account/password.html.twig',[
             'form' => $form->createView(),
             'notification' => $notification

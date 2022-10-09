@@ -58,18 +58,14 @@
             <strong>Livraison : </strong>{{(carrier.price/100)|number_format(2,',','.') }} €
             <hr>
             <strong>Total : </strong>{{((total /100) + (carrier.price/100))|number_format(2,',','.') }} €
-
             <a class="btn btn-dark btn-block mt-2" id="checkout-button">Payer</a>
         </div>
     </div>
-
 {% endblock %}
-
 {%block script%}
     <script type="text/javascript">
         var stripe = Stripe('pk_test_51LAFvjLC2bzFXll7FovMBYDXyJuXZIpkWxkxSYAPpcePiOtcelC1lXfmnfCWLyA5eHXxWk7ovhRswOWzN8hOAv9v00DAVNe1ut');
         var checkoutButton = document.getElementById('checkout-button');
-
         checkoutButton.addEventListener('click', function() {
             fetch("/commande/create-session/{{ reference }}", {
                 method: "POST"

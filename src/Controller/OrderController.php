@@ -14,19 +14,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class OrderController extends AbstractController
 {
-
     private $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
-
-
     #[Route('/commande', name: 'app_order')]
     public function index(Cart $cart, Request $request): Response
     {
-       // dd($this->getUser()->getAddresses()->getValues());
+       //dd($this->getUser()->getAddresses()->getValues());
         if(!$this->getUser()->getAddresses()->getValues()){
             return $this->redirectToRoute('app_account_address_add');
         }
@@ -42,7 +39,6 @@ class OrderController extends AbstractController
     #[Route('/commande/recapitulatif', name: 'app_order_recap', methods: 'POST')]
     public function add(Cart $cart, Request $request): Response
     {
-
         $form = $this->createForm(OrderType::class,null,[
             'user' => $this->getUser()
         ]);
@@ -87,21 +83,7 @@ class OrderController extends AbstractController
                 $this->entityManager->persist($orderDetails);
             }
 
-            //dd($order);
-            //dd($product_for_stripe);
-
-
-            //ne pas surcharger la bdd
             $this->entityManager->flush();
-
-            //Stripe::setApiKey('pk_test_51LAFvjLC2bzFXll7FovMBYDXyJuXZIpkWxkxSYAPpcePiOtcelC1lXfmnfCWLyA5eHXxWk7ovhRswOWzN8hOAv9v00DAVNe1ut');
-            //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
-
-
-            //dump($checkout_session->id);
-            //dd($checkout_session);
-
-
             return $this->render('order/add.html.twig',[
                 'cart' => $cart->getFull(),
                 'carrier' => $carriers,

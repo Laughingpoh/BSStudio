@@ -39,7 +39,6 @@ class OrderSuccessController extends AbstractController
            $content = "Bonjour ".$order->getUser()->getFirstname().",";
            $corps = "Nous vous remercions pour votre commande n°<strong>".$order->getReference()."</strong>. Vous pouvez à tout moment visualiser celle-ci dans la section commande de votre compte.";
            $mail->send($order->getUser()->getEmail(),$order->getUser()->getFirstname(),'Commande validée - Belgian Sound Studio',$content,$corps);
-
        }
 
         return $this->render('order_success/index.html.twig', [

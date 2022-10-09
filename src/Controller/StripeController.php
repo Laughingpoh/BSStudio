@@ -21,18 +21,12 @@ class StripeController extends AbstractController
         $product_for_stripe = [];
         $YOUR_DOMAIN = 'http://46.101.60.72';
         //$YOUR_DOMAIN = 'https://www.nomDemaine.com/uploads/etc.'
-
         $order = $entityManager->getRepository(Order::class)->findOneByReference($reference);
-
         if (!$order) {
             new JsonResponse(['error'=>'order']);
         }
-
         foreach($order->getOrderDetails()->getValues() as $product) {
-
             $product_object = $entityManager->getRepository(Product ::class)->findOneByName($product->getProduct());
-
-            //Tableau a envoyer à Stripe
             $product_for_stripe[] = [
                 'price_data' => [
                     'currency' => 'eur',
@@ -45,7 +39,6 @@ class StripeController extends AbstractController
                 'quantity' => $product->getQuantity(),
             ];
         }
-
         $product_for_stripe[] = [
             'price_data' => [
                 'currency' => 'eur',
@@ -58,8 +51,6 @@ class StripeController extends AbstractController
             ],
             'quantity' => 1,
         ];
-
-
         Stripe::setApiKey('sk_test_51LAFvjLC2bzFXll7lfGZJ0l5P4iqfxbqUxUEV5VDSaaBTBXDwmhJljRhyWar7uOrwIqrDclFc1LX0KvftWKZxTOu00kupkj1C3');
         $checkout_session = Session::create([
             'customer_email' => $this->getUser()->getEmail(),
@@ -74,7 +65,6 @@ class StripeController extends AbstractController
 
         $order->setStripeSessionId($checkout_session->id);
         $entityManager->flush();
-
         $response = new JsonResponse(['id'=>$checkout_session->id]);
         return $response;
     }

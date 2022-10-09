@@ -17,7 +17,6 @@ class ResetPasswordController extends AbstractController
 {
 
     private $entityManager;
-
     /**
      * @param $entityManager
      */
@@ -94,7 +93,6 @@ class ResetPasswordController extends AbstractController
         {
             $new_pwd = $form->get('new_password')->getData();
             //dd($new_pwd);
-
             //encodage mot de passe
             $password = $encoder->hashPassword($reset_password->getUser(),$new_pwd);
             $reset_password->getUser()->setPassword($password);

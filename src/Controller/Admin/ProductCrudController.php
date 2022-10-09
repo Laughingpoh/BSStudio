@@ -19,7 +19,6 @@ class ProductCrudController extends AbstractCrudController
         return Product::class;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -35,8 +34,6 @@ class ProductCrudController extends AbstractCrudController
             BooleanField::new('isBest'),
             MoneyField::new('price')->setCurrency('EUR'),
             AssociationField::new('category')
-
         ];
     }
-
 }
