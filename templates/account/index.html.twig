@@ -4,10 +4,8 @@
 
 {% block content %}
     <h1>Mon compte</h1>
-    Bievenue sur votre compte, {{app.user.firstname}} {{app.user.lastname}}</br>
+    Bievenue sur votre compte, {{app.user.firstname}} {{app.user.lastname}}<br/>
     <hr>
-
-
 
 <div class="card-deck">
     {%if is_granted('ROLE_ADMIN')%}
